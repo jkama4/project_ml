@@ -20,6 +20,12 @@ class kUtils:
         return kUtils._loaded_data
 
     @staticmethod
+    def get_feature_list() -> list[str]:
+        kUtils.get_loaded_data()
+
+        return kUtils._loaded_data.columns.to_list()
+
+    @staticmethod
     def get_split_data(
         train_frac: float = 0.5,
         test_frac: float = 0.3,
@@ -41,7 +47,7 @@ class kUtils:
             train_size=train_frac,
         )
 
-        test_size = test_frac / (test_frac + validation_frac)
+        test_size: float = test_frac / (test_frac + validation_frac)
         X_test, X_val, y_test, y_val = train_test_split(
             X_temp,
             y_temp,
